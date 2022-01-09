@@ -1,2 +1,1 @@
-# log-surveillance-
-ログ監視アプリケーション
+# log-survey(ログ監視アプリケーション)
