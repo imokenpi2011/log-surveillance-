@@ -2,7 +2,7 @@ package serverDetail
 
 import (
 	"bufio"
-	"fmt"
+	"log"
 	"log-survey/app/model"
 	"log-survey/config"
 	"os"
@@ -21,7 +21,7 @@ func GetTimeoutServerList() []*model.TimeoutServer {
 	// ファイルの読み込み
 	file, err := os.Open(config.Config.InputFile)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 	}
 	defer file.Close()
 
@@ -36,11 +36,9 @@ func GetTimeoutServerList() []*model.TimeoutServer {
 		if len(rowSlice) != 3 {
 			continue
 		}
-		fmt.Println(rowSlice)
 
 		// ping応答がないログかどうか検証(応答時間が「-」)
 		if rowSlice[2] == "-" {
-			fmt.Println("ping timeout.")
 			// ping応答がない場合
 			// 応答がないサーバー一覧に追加されていない場合のみ処理を行う
 			if !isIpContains(rowSlice[1], timeoutServerIpList) {
@@ -48,20 +46,15 @@ func GetTimeoutServerList() []*model.TimeoutServer {
 				timeoutServerIpList = append(timeoutServerIpList, rowSlice[1])
 				// 応答がないサーバー詳細にタイムアウト開始時刻、IPを登録
 				registTimeoutServerDetail(rowSlice, timeoutServerDetail)
-				fmt.Println(timeoutServerIpList)
-				fmt.Println(timeoutServerDetail)
 			}
 		} else {
 			// ping応答がある場合
 			// 応答がないサーバー一覧にある場合、復帰した事にする
 			if isIpContains(rowSlice[1], timeoutServerIpList) {
-				fmt.Println("recovered.")
 				// 応答がないサーバー一覧から削除
 				timeoutServerIpList = deleteRecoveredIp(rowSlice[1], timeoutServerIpList)
 				// 応答がないサーバー詳細に復帰時刻を登録
 				registRecoverServerDetail(rowSlice, timeoutServerDetail)
-				fmt.Println(timeoutServerIpList)
-				fmt.Println(timeoutServerDetail)
 			}
 		}
 	}
