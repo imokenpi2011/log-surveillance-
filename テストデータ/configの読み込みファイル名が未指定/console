@@ -1,0 +1,4 @@
+log-survey $ go run main.go
+2022/01/10 20:25:59 open : no such file or directory
+exit status 1
+log-survey $

@@ -1,0 +1,6 @@
+log-survey $ go run main.go
+2022/01/10 20:27:10 Timeout server found. Start generating report.
+2022/01/10 20:27:10 2 records found.
+2022/01/10 20:27:10 open : no such file or directory
+exit status 1
+log-survey $
