@@ -33,10 +33,8 @@ func LoadConfig() {
 	}
 
 	//読み込んだ値を設定する
-	argCount, _ := cfg.Section("args").Key("argcount").Int()
 	Config = ConfigList{
 		InputFile:  cfg.Section("file").Key("inputfile").String(),
 		OutputFile: cfg.Section("file").Key("outputfile").String(),
-		ArgCount:   argCount,
 	}
 }
