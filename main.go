@@ -16,10 +16,10 @@ func main() {
 		return
 	}
 	// ログからサーバーの復旧時間を取り出す
-	timeoutServerDetail := serverDetail.GetTimeoutServerList(minTimeoutCount)
+	timeoutServerDetail := serverDetail.GetTimeoutServerList()
 
 	// csv出力
-	report.OutputCsv(timeoutServerDetail)
+	report.OutputCsv(timeoutServerDetail, minTimeoutCount)
 }
 
 // 引数の取得

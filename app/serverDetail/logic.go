@@ -2,7 +2,6 @@ package serverDetail
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"log-survey/app/model"
 	"log-survey/config"
@@ -11,7 +10,7 @@ import (
 )
 
 // タイムアウトしたサーバーの一覧を復旧時間も合わせて出す
-func GetTimeoutServerList(minTimeoutCount int) []*model.TimeoutServer {
+func GetTimeoutServerList() []*model.TimeoutServer {
 
 	// タイムアウトしたサーバーの詳細一覧
 	var timeoutServerDetail = []*model.TimeoutServer{}
@@ -47,7 +46,8 @@ func GetTimeoutServerList(minTimeoutCount int) []*model.TimeoutServer {
 				timeoutServerIpList = append(timeoutServerIpList, rowSlice[1])
 				// 応答がないサーバー詳細にタイムアウト開始時刻、IPを登録
 				timeoutServerDetail = registTimeoutServerDetail(rowSlice, timeoutServerDetail)
-				fmt.Println(timeoutServerDetail)
+			} else {
+				countupTimeoutCount(rowSlice[1], timeoutServerDetail)
 			}
 		} else {
 			// ping応答がある場合
@@ -57,7 +57,6 @@ func GetTimeoutServerList(minTimeoutCount int) []*model.TimeoutServer {
 				timeoutServerIpList = deleteRecoveredIp(rowSlice[1], timeoutServerIpList)
 				// 応答がないサーバー詳細に復帰時刻を登録
 				timeoutServerDetail = registRecoverServerDetail(rowSlice, timeoutServerDetail)
-				fmt.Println(timeoutServerDetail)
 			}
 		}
 	}
