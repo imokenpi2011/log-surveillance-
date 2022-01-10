@@ -16,6 +16,9 @@ import (
 func OutputCsv(timeoutServerDetail []*model.TimeoutServer) {
 	// タイムアウトしたサーバーがあるか検証
 	if len(timeoutServerDetail) > 0 {
+		log.Printf("Timeout server found. Start generating report.")
+		log.Printf("%d records found.\n", len(timeoutServerDetail))
+
 		// []ファイル名を生成する
 		fileName := strings.Replace(config.Config.OutputFile, "[date]", getDateTimeString(), 1)
 		// 出力対象のファイルを読み込む
@@ -31,8 +34,11 @@ func OutputCsv(timeoutServerDetail []*model.TimeoutServer) {
 		cw := csv.NewWriter(file)
 		defer cw.Flush()
 		cw.WriteAll(outputServerDetail)
-	}
+		log.Println("Success generating report.")
 
+		return
+	}
+	log.Printf("Timeout server not found. All green.")
 }
 
 // csv出力形式にフォーマットした配列を返す
