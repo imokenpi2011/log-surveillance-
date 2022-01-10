@@ -1,0 +1,5 @@
+log-survey $ go run main.go ee
+2022/01/10 20:53:26 Argument must be specified number.
+2022/01/10 20:53:26 strconv.Atoi: parsing "ee": invalid syntax
+exit status 1
+log-survey $

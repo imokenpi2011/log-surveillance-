@@ -1,0 +1,5 @@
+log-survey $ go run main.go 1
+2022/01/10 21:38:48 Timeout server found. Start generating report.
+2022/01/10 21:38:48 5 records found.
+2022/01/10 21:38:48 Success generating report.
+log-survey $

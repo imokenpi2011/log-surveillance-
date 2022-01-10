@@ -1,0 +1,2 @@
+log-survey $ go run main.go 0
+log-survey $

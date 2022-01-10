@@ -1,0 +1,3 @@
+log-survey $ go run main.go 6
+2022/01/10 21:38:35 Timeout server not found. All green.
+log-survey $
