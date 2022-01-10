@@ -45,10 +45,11 @@ func registTimeoutServerDetail(timeoutServer []string, timeoutServerDetail []*mo
 		return timeoutServerDetail
 	}
 
-	// タイムアウトしたサーバーの詳細にIPとタイムアウト時刻を書き込む
+	// タイムアウトしたサーバーの詳細にIPとタイムアウト時刻,連続タイムアウト回数を書き込む
 	timeoutServerDetail = append(timeoutServerDetail, &model.TimeoutServer{
 		Ip:           timeoutServer[1],
 		TimeoutStart: timeoutServer[0],
+		TimeoutCount: 1,
 	})
 
 	return timeoutServerDetail
