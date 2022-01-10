@@ -4,6 +4,9 @@
 各回答はブランチに対応しています。
 例 ) Q1の回答→Q1ブランチ
 
+- [Q1のブランチ](https://github.com/imokenpi2011/log-survey/tree/Q1)
+- [Q2のブランチ](https://github.com/imokenpi2011/log-survey/tree/Q2)
+
 今回、Q1~2までしか回答できなかったため2ブランチが対象となります。
 
 実装の解説に関しては各ブランチの`README.md`を参照してください。
