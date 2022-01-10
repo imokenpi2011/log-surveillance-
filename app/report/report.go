@@ -6,29 +6,31 @@ import (
 	"log-survey/app/model"
 	"log-survey/config"
 	"os"
+	"strings"
+	"time"
+
+	"github.com/leekchan/timeutil"
 )
 
 // csv形式でファイルを出力する
 func OutputCsv(timeoutServerDetail []*model.TimeoutServer) {
-	// 出力対象のファイルを読み込む
-	file, err := os.OpenFile(config.Config.OutputFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	defer file.Close()
-
-	// CSV書き込み処理
-	cw := csv.NewWriter(file)
-	defer cw.Flush()
-
 	// タイムアウトしたサーバーがあるか検証
 	if len(timeoutServerDetail) > 0 {
+		// []ファイル名を生成する
+		fileName := strings.Replace(config.Config.OutputFile, "[date]", getDateTimeString(), 1)
+		// 出力対象のファイルを読み込む
+		file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0666)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		defer file.Close()
+
 		// ある場合はCSV形式にしてフォーマット
 		outputServerDetail := formatServerDetail(timeoutServerDetail)
+		// CSV書き込み処理
+		cw := csv.NewWriter(file)
+		defer cw.Flush()
 		cw.WriteAll(outputServerDetail)
-	} else {
-		// 無い場合はメッセージのみ書き込む
-		cw.Write([]string{"All server green."})
 	}
 
 }
@@ -53,4 +55,11 @@ func formatServerDetail(timeoutServerDetail []*model.TimeoutServer) (formatedSer
 	}
 
 	return formatedServerList
+}
+
+// ファイル用にyyyymmddHHMMSS形式の文字列を取得する
+func getDateTimeString() string {
+	n := time.Now()
+	curTimeStr := timeutil.Strftime(&n, "%Y%m%d%H%M%S")
+	return string(curTimeStr)
 }
