@@ -1,7 +1,6 @@
 package serverDetail
 
 import (
-	"fmt"
 	"log-survey/app/model"
 )
 
@@ -64,7 +63,6 @@ func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*
 	// タイムアウトしたサーバーの詳細一覧を検索し、該当のIPのデータに復帰時間を書き込む
 	for _, serverDetail := range timeoutServerDetail {
 		if recoveredServer[1] == serverDetail.Ip {
-			fmt.Println("matched.")
 			// 一度復帰したログには書き込まない
 			if serverDetail.TimeoutEnd == "" {
 				serverDetail.TimeoutEnd = recoveredServer[0]
