@@ -1,9 +1,14 @@
 package main
 
 import (
-	"log-survey/app"
+	"log-survey/app/report"
+	"log-survey/app/serverDetail"
 )
 
 func main() {
-	app.ReadFile()
+	// ログからサーバーの復旧時間を取り出す
+	timeoutServerDetail := serverDetail.GetTimeoutServerList()
+
+	// csv出力
+	report.OutputCsv(timeoutServerDetail)
 }
