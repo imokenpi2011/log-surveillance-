@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"log-survey/app"
+)
 
 func main() {
-	fmt.Println("hello.")
+	app.ReadFile()
 }
