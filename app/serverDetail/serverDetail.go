@@ -55,9 +55,10 @@ func registTimeoutServerDetail(timeoutServer []string, timeoutServerDetail []*mo
 }
 
 // 復帰したサーバーのログの時間を書き込む
-func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*model.TimeoutServer) {
+func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*model.TimeoutServer) []*model.TimeoutServer {
+	// フォーマットg違う場合は何もしない
 	if len(recoveredServer) != 3 {
-		return
+		return timeoutServerDetail
 	}
 
 	// タイムアウトしたサーバーの詳細一覧を検索し、該当のIPのデータに復帰時間を書き込む
@@ -69,4 +70,6 @@ func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*
 			}
 		}
 	}
+
+	return timeoutServerDetail
 }
