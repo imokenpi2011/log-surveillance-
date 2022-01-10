@@ -10,6 +10,7 @@ import (
 type ConfigList struct {
 	InputFile  string // 読み込みファイル
 	OutputFile string // 出力ファイル
+	ArgCount   int    // 許可する引数の数
 }
 
 //Configインスタンスを定義
@@ -32,8 +33,10 @@ func LoadConfig() {
 	}
 
 	//読み込んだ値を設定する
+	argCount, _ := cfg.Section("args").Key("argcount").Int()
 	Config = ConfigList{
 		InputFile:  cfg.Section("file").Key("inputfile").String(),
 		OutputFile: cfg.Section("file").Key("outputfile").String(),
+		ArgCount:   argCount,
 	}
 }

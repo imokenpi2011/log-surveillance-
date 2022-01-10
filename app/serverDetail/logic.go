@@ -10,7 +10,7 @@ import (
 )
 
 // タイムアウトしたサーバーの一覧を復旧時間も合わせて出す
-func GetTimeoutServerList() []*model.TimeoutServer {
+func GetTimeoutServerList(minTimeoutCount int) []*model.TimeoutServer {
 
 	// タイムアウトしたサーバーの詳細一覧
 	var timeoutServerDetail = []*model.TimeoutServer{}
