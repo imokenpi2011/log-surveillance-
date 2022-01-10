@@ -57,7 +57,7 @@ func registTimeoutServerDetail(timeoutServer []string, timeoutServerDetail []*mo
 
 // 復帰したサーバーのログの時間を書き込む
 func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*model.TimeoutServer) []*model.TimeoutServer {
-	// フォーマットg違う場合は何もしない
+	// フォーマットが違う場合は何もしない
 	if len(recoveredServer) != 3 {
 		return timeoutServerDetail
 	}
@@ -68,6 +68,27 @@ func registRecoverServerDetail(recoveredServer []string, timeoutServerDetail []*
 			// 一度復帰したログには書き込まない
 			if serverDetail.TimeoutEnd == "" {
 				serverDetail.TimeoutEnd = recoveredServer[0]
+			}
+		}
+	}
+
+	return timeoutServerDetail
+}
+
+// 連続タイムアウト回数のカウントアップを実行
+func countupTimeoutCount(targetServerIp string, timeoutServerDetail []*model.TimeoutServer) []*model.TimeoutServer {
+	// 文字列がない場合は何もしない
+	if targetServerIp == "" {
+		return timeoutServerDetail
+	}
+
+	// タイムアウトしたサーバーの詳細一覧を検索し、該当のIPのデータのタイムアウト回数を増やす
+	for _, serverDetail := range timeoutServerDetail {
+		if targetServerIp == serverDetail.Ip {
+			// 一度復帰したログには書き込まない
+			if serverDetail.TimeoutEnd == "" {
+				// カウントアップ
+				serverDetail.TimeoutCount++
 			}
 		}
 	}
