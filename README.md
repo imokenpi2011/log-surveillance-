@@ -6,6 +6,8 @@
 
 - [Q1のブランチ](https://github.com/imokenpi2011/log-survey/tree/Q1)
 - [Q2のブランチ](https://github.com/imokenpi2011/log-survey/tree/Q2)
+- [Q3の実装方針](https://github.com/imokenpi2011/log-survey/wiki/12_Q3-%E5%AE%9F%E8%A3%85%E6%96%B9%E9%87%9D)
+- [Q4の実装方針](https://github.com/imokenpi2011/log-survey/wiki/13_Q4-%E5%AE%9F%E8%A3%85%E6%96%B9%E9%87%9D)
 
 今回、Q1~2までしか回答できなかったため2ブランチが対象となります。
 
